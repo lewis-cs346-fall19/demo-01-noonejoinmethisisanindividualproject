@@ -9,14 +9,17 @@ def main():
 
     while True:
         (connectedSock, clientAddress) = sock.accept()
-        print "client connected"
-   
-    try:
-        msg = "Server says: " + sock.recv(1024).decode() 
-    except ConnectionAbortedError:
-        sock.close()
+        print("client connected")
+        
+        while True:
+            try:
+                msg = "Server says: " + connectedSock.recv(1024).decode()
+            except ConnectionAbortedError:
+                sock.close()
 
-    sock.sendall(msg.encode())
+            connectedSock.sendall(msg.encode())
+
+        connectedSock.close()
 
 
 main()

@@ -10,6 +10,7 @@ def main():
         sock.sendall(msg.encode())
         msg = sock.recv(1024).decode()
         print(msg)
-
+    
+    sock.close()
 
 main()

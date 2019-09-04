@@ -1,4 +1,6 @@
 import socket
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE, SIG_DFL)
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -10,21 +12,18 @@ def main():
     while True:
         (connectedSock, clientAddress) = sock.accept()
         print("client connected")
-        
         while True:
             try:
-                msg = connectedSock.recv(1024).decode()
-                if len(msg) == 0: break
-                msg = "Server says: " + msg
+                msg = "Server says: " + connectedSock.recv(1024).decode() 
                 connectedSock.sendall(msg.encode())
             except ConnectionAbortedError:
                 sock.close()
 
-        
+            
+
         connectedSock.close()
         break
 
     sock.close()
-
 
 main()

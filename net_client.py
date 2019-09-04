@@ -5,7 +5,7 @@ def main():
     addr = ("localhost", 34720)
     sock.connect(addr)
     
-    for i in range(100):
+    for i in range(1, 101):
         msg = str(i)
         sock.sendall(msg.encode())
         msg = sock.recv(1024).decode()

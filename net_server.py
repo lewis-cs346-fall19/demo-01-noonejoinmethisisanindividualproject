@@ -13,13 +13,18 @@ def main():
         
         while True:
             try:
-                msg = "Server says: " + connectedSock.recv(1024).decode()
+                msg = connectedSock.recv(1024).decode()
+                if len(msg) == 0: break
+                msg = "Server says: " + msg
+                connectedSock.sendall(msg.encode())
             except ConnectionAbortedError:
                 sock.close()
 
-            connectedSock.sendall(msg.encode())
-
+        
         connectedSock.close()
+        break
+
+    sock.close()
 
 
 main()

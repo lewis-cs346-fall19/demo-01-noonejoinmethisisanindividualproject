@@ -1,6 +1,4 @@
 import socket
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE, SIG_DFL)
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
